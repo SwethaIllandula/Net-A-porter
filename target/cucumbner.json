@@ -1,0 +1,86 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 8049474679,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.driverSetUp()"
+            }
+          }
+        ],
+        "line": 13,
+        "name": "To Check Functionality Of Hair Accessories Based On Colour and Brand.",
+        "description": "",
+        "id": "accessories;to-check-functionality-of-hair-accessories-based-on-colour-and-brand.",
+        "after": [
+          {
+            "result": {
+              "duration": 162371009,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3074577259,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "User On Hair-Accessories Page",
+            "match": {
+              "location": "StepDefinitionForAccessories.user_On_Hair_Accessories_Page()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 10955349253,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "User Selects Products By Using Filters With Colours and Brands",
+            "match": {
+              "location": "StepDefinitionForAccessories.user_Selects_Products_By_Using_Filters_With_Colours_and_Brands()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 7006734020,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "User Should be able to See the Product",
+            "match": {
+              "location": "StepDefinitionForAccessories.user_Should_be_able_to_See_the_Product()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 12,
+            "name": "@Regression"
+          }
+        ]
+      }
+    ],
+    "name": "Accessories",
+    "description": "",
+    "id": "accessories",
+    "keyword": "Feature",
+    "uri": "src/test/resources/HairAccessories.feature"
+  }
+]
