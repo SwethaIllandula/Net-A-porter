@@ -53,13 +53,13 @@ public class HomePage extends DriverManager {
     return GenericMethods.getTitle(driver);}
 
 
-      public void searchWithKeywords(String products){
-       closeLink.click();
-       search.click();
-       searchBox.clear();
-       searchProducts = products;
-       enterSearchItem(products);
-       searchButton.click();
+    public void searchWithKeywords(String products){
+    closeLink.click();
+    search.click();
+    searchBox.clear();
+    searchProducts = products;
+    enterSearchItem(products);
+    searchButton.click();
       }
 
   public void enterSearchItem(String products){
@@ -68,25 +68,26 @@ public class HomePage extends DriverManager {
 
 
 
-   public ProductDescriptionPage moveToHairAccessories(){
+   public void  moveToHairAccessories(){
        closeLink.click();
        GenericMethods.actionsToMoveElement(driver,moveToAccessories);
       hairAccessorieslink.click();
-       return new ProductDescriptionPage();
+
    }
 
-public ProductDescriptionPage allAccessories(){
+public void allAccessories(){
        closeLink.click();
        GenericMethods.actionsToMoveElement(driver,moveToAccessories);
        clickAllAccessories.click();
-       return new ProductDescriptionPage();
+
 }
 
 
 public void selectFromFeaturedDesigners(String designers){
           int designerList= featuredDesigners.size();
        for(WebElement Designers:featuredDesigners){
-           if(Designers.getText().equalsIgnoreCase(designers)){
+           if(Designers.getText().equalsIgnoreCase("Gucci")){
+               System.out.println(Designers.getText());
                Designers.click();
                break;
            }

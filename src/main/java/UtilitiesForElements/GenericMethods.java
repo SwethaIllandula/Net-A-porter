@@ -30,13 +30,13 @@ public void actionsToContextClick(WebDriver driver, WebElement element){
     clickActions.contextClick(element); }
 
 
-    public void dropDownWithSelect(WebDriver driver, WebElement element,String text){
+    public static void dropDownWithSelect(WebElement element,String text){
         Select select = new Select(element);
          select.selectByVisibleText(text);
 
     }
 
-  public void dropDownByIndex(WebDriver driver,WebElement element,int value) {
+  public void dropDownByIndex(WebElement element,int value) {
     Select select = new Select(element);
     select.selectByIndex(value);
   }

@@ -40,27 +40,56 @@ public class ShippingDetailsPage extends DriverManager {
   @FindBy(css="input#purchasenow")
   private WebElement proceedToPurchase;
 
+  @FindBy(xpath = "//div/h1/span[contains(text(),'SHIPPING ADDRESS')]")
+  WebElement pageTitle;
+
+  @FindBy(className = "product-manufacturer")
+  WebElement productSummary;
+
+  @FindBy(id="proceedToPurchase")
+  WebElement confirmPurchase;
+
+  @FindBy(xpath = "//div[@id='shipping_address']//div")
+  WebElement shippingInfo;
+
+  @FindBy(css = "div.shipping-address-container")
+  WebElement finalShippingInfo;
 
 
-
-
-
-    public void fillShippingForm(DataTable credentials){
-
-      GenericMethods.dropDownByValue(title,"Mrs");
-     List<List<String>> data =credentials.raw();
-     firstname.sendKeys(data.get(0).get(0));
-     lastname.sendKeys(data.get(0).get(1));
-     GenericMethods.dropDownByValue(country,"United Kingdom");
-     address1.sendKeys(data.get(0).get(2));
-     townCity.sendKeys(data.get(0).get(3));
-     postcode.sendKeys(data.get(0).get(4));
-     telePhone.sendKeys(data.get(0).get(5));
-     radioBillingSameAddress.click();
-     proceedToPurchase.click();
-
+  public String titleOfThePage(){
+      return pageTitle.getText();
   }
 
+    public void fillShippingForm(String Firstname, String Lastname, String Address1, String TownCity,String Postcode, String Telephone){
 
+      GenericMethods.dropDownWithSelect(title,"Mrs");
+      firstname.sendKeys(Firstname);
+      lastname.sendKeys(Lastname);
+      GenericMethods.dropDownWithSelect(country,"United Kingdom");
+      address1.sendKeys(Address1);
+      townCity.sendKeys(TownCity);
+      postcode.sendKeys(Postcode);
+      telePhone.sendKeys(Telephone);
+      radioBillingSameAddress.click();
+  }
 
+public void checkoutForPurchase(){
+    proceedToPurchase.click();
+
+}
+ public String productSummary(){
+    return productSummary.getText();
+ }
+
+ public void confirmPurchase(){
+    confirmPurchase.click();
+ }
+
+ public String getShippingInfo(){
+   return shippingInfo.getText();
+ }
+
+ public String finalInfo(){
+    return finalShippingInfo.getText();
+ }
 }

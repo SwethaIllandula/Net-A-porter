@@ -98,15 +98,16 @@ public class checkLocators {
 
 
         public void selectFromFeaturedDesigners (String designers){
+           WebElement gucci= driver.findElement(By.linkText("Gucci"));
             int counter=0;
             List<WebElement> featuredDesigners = driver.findElements(By.cssSelector(".sf-nav__featured-designers ul li"));
             int designerList = featuredDesigners.size();
             System.out.println(designerList);
             for (WebElement Designers : featuredDesigners) {
                 System.out.println(Designers.getText());
-                if (Designers.getText().equalsIgnoreCase(designers)) {
-                    counter++;
-                    Designers.click();
+                //if(Designers.)
+               if (Designers.getText().equalsIgnoreCase(designers)) {
+                   // gucci.click();
                     break;
                 }
 

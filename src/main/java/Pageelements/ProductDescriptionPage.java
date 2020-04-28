@@ -1,6 +1,7 @@
 package Pageelements;
 
 import UtilitiesForElements.GenericMethods;
+import junit.framework.TestCase;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -52,17 +53,20 @@ public class ProductDescriptionPage extends DriverManager{
       @FindBy(linkText = "Sunglasses")
       private WebElement sunGlasses;
 
+      @FindBy(className = "Header5__title")
+      private WebElement pageTitleElement;
+
       @FindBy(className = "Header5__headingsContainer")
       private WebElement titleOfThePage;
 
       @FindBy(className = "ProductInformation77__designer")
       private WebElement productTitle;
 
+    @FindBy(css = "a[title='Shopping bag']")
+    private WebElement checkShoppingBag;
 
-public String titleOfThePage(){
-   return GenericMethods.getTitle(driver);
 
-}
+
 
 public String getProductTitle(){
    return productTitle.getText();
@@ -89,62 +93,28 @@ int products=  GenericMethods.randomNumberHelper(productsAvailable);
 
 }
 
-public void chooseProductColour(){
-    filterColours.click();
-    int randomColour= colours.size();
-    System.out.println("Colours Available " +randomColour);
-    if(randomColour==0){
-        fail("No Colours to choose");
-    }
 
-   int coloursToChoose= GenericMethods.randomNumberHelper(randomColour);
-   WebElement chooseColour =colours.get(coloursToChoose);
-   System.out.println("Chosen Colour is  "+ chooseColour.getText());
-   chooseColour.click();
-   GenericMethods.refreshPage(driver);
-}
 
-public void chooseProductBrand(){
-    filterBrands.click();
-    int selectBrand = brands.size();
-    System.out.println(" Brands Available are :" +selectBrand);
-    if(selectBrand==0){
-        fail("No Brands Available ");
-    }
-    int randomBrands = GenericMethods.randomNumberHelper(selectBrand);
-    WebElement chooseAnyBrand = brands.get(randomBrands);
-    System.out.println("Chosen Brand is "+chooseAnyBrand.getText());
-    chooseAnyBrand.click();
+    public void selectRandomProduct(){
+    int Products =GenericMethods.randomNumberHelper(listAccessories.size());
+    if(Products==0){
+    TestCase.fail("No Products Available");}
+    WebElement chooserandomProduct  = listAccessories.get(Products);
+    chooserandomProduct.click();
     GenericMethods.refreshPage(driver);
 
 }
 
-public void accessoriesCategory(){
-    filterCategories.click();
-    sunGlasses.click();
-    GenericMethods.refreshPage(driver);
-    filterAccessories.click();
-    int sunGlassTypes = typesOfSunglasses.size();
-    System.out.println("SunGlasses available are " +sunGlassTypes);
-    if(sunGlassTypes==0){
-        fail("No Sunglass Varieties to filter");
-    }
-   int selectSunGlasses= GenericMethods.randomNumberHelper(sunGlassTypes);
-   WebElement chooseSunGlasses = typesOfSunglasses.get(selectSunGlasses);
-   System.out.println("Chosen Accessory is " +chooseSunGlasses.getText());
-   chooseSunGlasses.click();
-   GenericMethods.refreshPage(driver);
-
-
-}
-
-public String pageTitle(){
-   return titleOfThePage.getText();
+    public String pageTitle(){
+    return titleOfThePage.getText();
 }
 
 public void addProductToBag() throws InterruptedException {
 GenericMethods.refreshPage(driver);
     addToBag.click();
+    checkShoppingBag.click();
+    if(checkShoppingBag.equals("out of stock")){
+    fail("Item is out of stock");}
     GenericMethods.refreshPage(driver);
 
 }
