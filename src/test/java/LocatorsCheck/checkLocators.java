@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,43 +22,53 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
 
 
 public class checkLocators {
     WebDriver driver;
 
     @Test
-    public void testTheElements() {
+    public void testTheElements() throws InterruptedException {
 
 
         WebDriverManager.chromedriver().setup();
+
         driver = new ChromeDriver();
         driver.get("http://www.netaporter.com");
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.findElement(By.cssSelector("a.deliver-component-CloseButton.deliver-component-CloseButton--transparent")).click();
-        WebElement designerlink = driver.findElement(By.cssSelector("a[href*='Shop/AZDesigners?cm_sp=topnav-_-designers-_-topbar']"));
-        // WebElement moveToAccessories =driver.findElement(By.cssSelector("a[href*='Shop/Accessories?']"));
+        driver.findElement(By.xpath("//span[@class='ccx-lightbox-close']")).click();
+       //driver.findElement(By.cssSelector("a.deliver-component-CloseButton.deliver-component-CloseButton--transparent")).click();
+        // driver.findElement(By.xpath("(//li[@class='sign-in'])[1]")).click();
+
+       // WebElement designerlink = driver.findElement(By.cssSelector("a[href*='Shop/AZDesigners?cm_sp=topnav-_-designers-_-topbar']"));
+       WebElement moveToAccessories = driver.findElement(By.cssSelector("a[href*='Shop/Accessories?']"));
         Actions action = new Actions(driver);
-        action.moveToElement(designerlink).build().perform();
-        selectFromFeaturedDesigners("Gucci");
-       /* driver.findElement(By.linkText("All Accessories")).click();
+        action.moveToElement(moveToAccessories).build().perform();
+        // selectFromFeaturedDesigners("Gucci");
+        driver.findElement(By.linkText("All Accessories")).click();
         //driver.findElement(By.xpath("(//span[@class='AccordionSection2__arrowIcon arrowIcon'])[4]")).click();
-        driver.findElement(By.xpath("(//label[@class='AccordionSection2__heading openLabel'])[1]")).click();
-        driver.findElement(By.linkText("Sunglasses")).click();
-        driver.navigate().refresh();
-        driver.findElement(By.xpath("(//label[@class='AccordionSection2__heading openLabel'])[2]")).click();
-        List<WebElement> sunglasses = driver.findElements(By.cssSelector("a[href ^='/en-gb/shop/accessories/sunglasses/']"));
-        System.out.println(sunglasses.size());
-        int typesOfSunGlasses = GenericMethods.randomNumberHelper(sunglasses.size());
-        WebElement chooseSunGlasses = sunglasses.get(typesOfSunGlasses);
-        chooseSunGlasses.click();
-        driver.navigate().refresh();
+        // driver.findElement(By.xpath("(//label[@class='AccordionSection2__heading openLabel'])[1]")).click();
+        // driver.findElement(By.linkText("Sunglasses")).click();
+        //driver.navigate().refresh();
         driver.findElement(By.xpath("(//label[@class='AccordionSection2__heading openLabel'])[3]")).click();
+        //Thread.sleep(3000);
+        // List<WebElement> sunglasses = driver.findElements(By.cssSelector("a[href ^='/en-gb/shop/accessories/sunglasses/']"));
+        // System.out.println(sunglasses.size());
+        //int typesOfSunGlasses = GenericMethods.randomNumberHelper(sunglasses.size());
+        // WebElement chooseSunGlasses = sunglasses.get(typesOfSunGlasses);
+        // chooseSunGlasses.click();
+        multipleBrands("Alexander Mc queen","Gucci");
+        //Thread.sleep(5000);
+        //driver.navigate().refresh();
+        //driver.findElement(By.xpath("(//label[@class='AccordionSection2__heading openLabel'])[3]")).click();
         //List<WebElement>  categories= driver.findElements(By.cssSelector(".PLPAccordionSection43--active.override .AccordionSection2__content.content a span.Filter43__filterLineCheckbox.radioButton"));
 
-        List<WebElement> colours = driver.findElements(By.cssSelector(".Swatch6.Filter43__swatch"));
+       /* List<WebElement> colours = driver.findElements(By.cssSelector(".Swatch6.Filter43__swatch"));
         // driver.navigate().refresh();
         System.out.println(colours.size());
         int chooseColour = GenericMethods.randomNumberHelper(colours.size());
@@ -96,30 +107,110 @@ public class checkLocators {
                 e.printStackTrace();
             }*/
 
+       /*  driver.findElement(By.linkText("Register")).click();
+        driver.findElement(By.xpath("//input[@name='firstName']")).sendKeys("swetha");
+        driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys("illan");
+        driver.findElement(By.cssSelector("[placeholder='Email address']")).sendKeys("swetha.illan@gmail.com");
+        driver.findElement(By.cssSelector("[placeholder='Confirm email address']")).sendKeys("swetha.illan@gmail.com");
+        driver.findElement(By.cssSelector("[placeholder='Password']")).sendKeys("Net-A-P");
+    WebElement element =driver.findElement(By.id("country"));
+        GenericMethods.dropDownByValue(element,"GB");
+    WebElement birthday= driver.findElement(By.cssSelector("[name='birthDay']"));
+        GenericMethods.dropDownByValue(birthday,"22");
+    WebElement birthMonth= driver.findElement(By.cssSelector("[name='birthMonth']"));
+        GenericMethods.dropDownByValue(birthMonth,"1");
+        driver.findElement(By.xpath("//input[@type='radio' and @value='false']")).click();
+        driver.findElement(By.xpath("//input[@id='captcha' and @type='checkbox']")).click();
+        driver.findElement(By.cssSelector("#submit-registration")).click();*/
 
-        public void selectFromFeaturedDesigners (String designers){
-           WebElement gucci= driver.findElement(By.linkText("Gucci"));
-            int counter=0;
-            List<WebElement> featuredDesigners = driver.findElements(By.cssSelector(".sf-nav__featured-designers ul li"));
-            int designerList = featuredDesigners.size();
-            System.out.println(designerList);
-            for (WebElement Designers : featuredDesigners) {
-                System.out.println(Designers.getText());
-                //if(Designers.)
-               if (Designers.getText().equalsIgnoreCase(designers)) {
-                   // gucci.click();
-                    break;
+
+    public void selectFromFeaturedDesigners(String brands) {
+        WebElement gucci = driver.findElement(By.linkText("Gucci"));
+        int counter = 0;
+        List<WebElement> featuredDesigners = driver.findElements(By.cssSelector(".sf-nav__featured-designers ul li"));
+        int designerList = featuredDesigners.size();
+        System.out.println(designerList);
+        for (WebElement Designers : featuredDesigners) {
+            System.out.println(Designers.getText());
+            //if(Designers.)
+            try{
+            if (Designers.getText().equalsIgnoreCase(brands)) {
+                // gucci.click();
+                break;
+            }}
+            catch (Exception e){
+                System.out.println("someException");
+                e.printStackTrace();
+            }
+
+            if (designerList == 0) {
+                TestCase.fail("Designer is not Available");
+            }
+
+        }
+    }
+
+
+    public void clickBrand(String value) throws InterruptedException {
+        int counter = 0;
+        List<WebElement> Brands = driver.findElements(By.cssSelector(".DesignerFilterGroup43__list a span"));
+        int diffBrands = Brands.size();
+        System.out.println(diffBrands);
+        for (WebElement chooseBrand : Brands) {
+            try {
+                String text = chooseBrand.getText();
+                // Thread.sleep(2000);
+                System.out.println(text);
+                if (text.equalsIgnoreCase(value)) {
+                    //counter++;
+                    chooseBrand.click();
+                    //Thread.sleep(2000);
+                    driver.navigate().refresh();
+                    System.out.println("element clicked is " + text);
                 }
-
-                if (designerList == 0) {
-                    TestCase.fail("Designer is not Available");
-                }
-
+            } catch (Exception e) {
+                System.out.println("some Exception");
+                e.printStackTrace();
             }
         }
 
+        //Thread.sleep(2000);
+        if (diffBrands == 0) {
+            System.out.println("No colours available");
+        }
+        String actual = driver.getCurrentUrl();
+        assertThat(actual, containsString("brand"));
+    }
+
+
+    public void multipleBrands(String... value) {
+        List<WebElement> Brandslist = driver.findElements(By.cssSelector(".DesignerFilterGroup43__list a "));
+        //List<WebElement>Brandslist = driver.findElements(By.xpath("//div[@class='DesignerFilterGroup43__list']//a//span[@class='Filter43__filterLineLabel']"));
+
+        for (int i = 0; i < Brandslist.size(); i++) {
+            try{
+            String text = Brandslist.get(i).getText();
+            System.out.println(text);
+
+            for (int j = 0; j < value.length; j++) {
+                if (text.equals(value[j])) {
+                    Brandslist.get(i).click();
+                    driver.navigate().refresh();
+                    break;
+
+                    //driver.navigate().refresh();
+                }
+            }} catch (Exception e) {
+
+                }
+        }
+    }
 
     }
+
+
+
+
 
 
 
