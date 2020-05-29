@@ -67,7 +67,8 @@ public class AccessoryPage extends DriverManager {
     @FindBy(css = ".FilterTags43__tag")
     private WebElement brandSearchName;
 
-    @FindBy(xpath = "(//div[@class='SelectedFilterLabel43__subTitle SelectedFilterLabel43__subTitle--new'])[3]")
+    @FindBy(css="a.FilterTags43__link div.FilterTags43__tag")
+    //(xpath = "(//div[@class='SelectedFilterLabel43__subTitle SelectedFilterLabel43__subTitle--new'])[3]")
     private WebElement brandText;
 
 
@@ -139,8 +140,9 @@ public class AccessoryPage extends DriverManager {
     }
 
 
-    public void designerSearch(String DesignerName){
+    public void designerSearch(String DesignerName) throws InterruptedException {
         filterOnlyBrands.click();
+        GenericMethods.explicitWait(driver,5,DesignerSearchField);
         DesignerSearchField.click();
         DesignerSearchField.sendKeys(DesignerName);
         checkBox.click();

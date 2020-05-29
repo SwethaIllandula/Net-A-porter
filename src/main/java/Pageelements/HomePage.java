@@ -54,7 +54,6 @@ public class HomePage extends DriverManager {
 
 
     public void searchWithKeywords(String products){
-    closeLink.click();
     search.click();
     searchBox.clear();
     searchProducts = products;
@@ -69,14 +68,14 @@ public class HomePage extends DriverManager {
 
 
    public void  moveToHairAccessories(){
-       closeLink.click();
+
        GenericMethods.actionsToMoveElement(driver,moveToAccessories);
       hairAccessorieslink.click();
 
    }
 
 public void allAccessories(){
-       closeLink.click();
+
        GenericMethods.actionsToMoveElement(driver,moveToAccessories);
        clickAllAccessories.click();
 

@@ -5,12 +5,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -41,28 +40,29 @@ public class checkLocators {
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//span[@class='ccx-lightbox-close']")).click();
-       //driver.findElement(By.cssSelector("a.deliver-component-CloseButton.deliver-component-CloseButton--transparent")).click();
+       // driver.findElement(By.xpath("//span[@class='ccx-lightbox-close']")).click();
+        //driver.findElement(By.cssSelector("a.deliver-component-CloseButton.deliver-component-CloseButton--transparent")).click();
         // driver.findElement(By.xpath("(//li[@class='sign-in'])[1]")).click();
 
-       // WebElement designerlink = driver.findElement(By.cssSelector("a[href*='Shop/AZDesigners?cm_sp=topnav-_-designers-_-topbar']"));
-       WebElement moveToAccessories = driver.findElement(By.cssSelector("a[href*='Shop/Accessories?']"));
+         WebElement designerlink = driver.findElement(By.cssSelector("a[href*='Shop/AZDesigners?cm_sp=topnav-_-designers-_-topbar']"));
+        //WebElement moveToAccessories = driver.findElement(By.cssSelector("a[href*='Shop/Accessories?']"));
         Actions action = new Actions(driver);
-        action.moveToElement(moveToAccessories).build().perform();
+        action.moveToElement(designerlink).build().perform();
         // selectFromFeaturedDesigners("Gucci");
-        driver.findElement(By.linkText("All Accessories")).click();
+        //driver.findElement(By.linkText("All Accessories")).click();
         //driver.findElement(By.xpath("(//span[@class='AccordionSection2__arrowIcon arrowIcon'])[4]")).click();
         // driver.findElement(By.xpath("(//label[@class='AccordionSection2__heading openLabel'])[1]")).click();
         // driver.findElement(By.linkText("Sunglasses")).click();
         //driver.navigate().refresh();
-        driver.findElement(By.xpath("(//label[@class='AccordionSection2__heading openLabel'])[3]")).click();
+        //driver.findElement(By.xpath("(//label[@class='AccordionSection2__heading openLabel'])[3]")).click();
+        //Thread.sleep(5000);
         //Thread.sleep(3000);
         // List<WebElement> sunglasses = driver.findElements(By.cssSelector("a[href ^='/en-gb/shop/accessories/sunglasses/']"));
         // System.out.println(sunglasses.size());
         //int typesOfSunGlasses = GenericMethods.randomNumberHelper(sunglasses.size());
         // WebElement chooseSunGlasses = sunglasses.get(typesOfSunGlasses);
         // chooseSunGlasses.click();
-        multipleBrands("Alexander Mc queen","Gucci");
+        selectFromFeaturedDesigners("Gucci");
         //Thread.sleep(5000);
         //driver.navigate().refresh();
         //driver.findElement(By.xpath("(//label[@class='AccordionSection2__heading openLabel'])[3]")).click();
@@ -125,22 +125,29 @@ public class checkLocators {
 
 
     public void selectFromFeaturedDesigners(String brands) {
-        WebElement gucci = driver.findElement(By.linkText("Gucci"));
-        int counter = 0;
+
+        By locator = By.cssSelector(".sf-nav__featured-designers ul li");
         List<WebElement> featuredDesigners = driver.findElements(By.cssSelector(".sf-nav__featured-designers ul li"));
         int designerList = featuredDesigners.size();
         System.out.println(designerList);
         for (WebElement Designers : featuredDesigners) {
-            System.out.println(Designers.getText());
+
+           // JavascriptExecutor js = (JavascriptExecutor)driver
+              WebDriverWait wait = new WebDriverWait(driver,15);
+              wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+              String text =Designers.getText();
+              System.out.println(text);
             //if(Designers.)
-            try{
-            if (Designers.getText().equalsIgnoreCase(brands)) {
-                // gucci.click();
-                break;
-            }}
-            catch (Exception e){
+                try {
+                if (text.equalsIgnoreCase(brands)) {
+                    GenericMethods.actionsToMoveElement(driver,Designers);
+                    //js.executeScript("arguments[0].scrollIntoView(true)");
+                     Designers.click();
+                    break;
+                }
+           } catch (Exception e) {
                 System.out.println("someException");
-                e.printStackTrace();
+                //e.printStackTrace();
             }
 
             if (designerList == 0) {
@@ -152,69 +159,85 @@ public class checkLocators {
 
 
     public void clickBrand(String value) throws InterruptedException {
-        int counter = 0;
-        List<WebElement> Brands = driver.findElements(By.cssSelector(".DesignerFilterGroup43__list a span"));
+        // driver.findElement(By.xpath("(//label[@class='AccordionSection2__heading openLabel'])[3]")).click();
+        driver.findElement(By.cssSelector("label[for='Brand-open'] ")).click();
+        By locator = By.xpath("//div[@class='DesignerFilterGroup43__list']//a");
+        List<WebElement> Brands = driver.findElements(By.xpath("//div[@class='DesignerFilterGroup43__list']//a"));
         int diffBrands = Brands.size();
         System.out.println(diffBrands);
         for (WebElement chooseBrand : Brands) {
+            WebDriverWait wait = new WebDriverWait(driver, 10);
             try {
                 String text = chooseBrand.getText();
-                // Thread.sleep(2000);
                 System.out.println(text);
                 if (text.equalsIgnoreCase(value)) {
-                    //counter++;
+                    wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
                     chooseBrand.click();
-                    //Thread.sleep(2000);
+                    System.out.println("element clicked is: " + text);
                     driver.navigate().refresh();
-                    System.out.println("element clicked is " + text);
                 }
             } catch (Exception e) {
-                System.out.println("some Exception");
+                System.out.println("Dom is closing after clicking element");
                 e.printStackTrace();
             }
+            // JavascriptExecutor executor = (JavascriptExecutor)driver;
+            //executor.executeScript("arguments[0].scrollIntoView(true);", chooseBrand.getText().equalsIgnoreCase(value));
+            //executor. executeScript("arguments[0]. click();", chooseBrand.getText().equalsIgnoreCase(value));
+            //chooseBrand.click();
+
+            // System.out.println("element clicked is " + text);
         }
 
         //Thread.sleep(2000);
         if (diffBrands == 0) {
             System.out.println("No colours available");
         }
-        String actual = driver.getCurrentUrl();
-        assertThat(actual, containsString("brand"));
     }
+    // String actual = driver.getCurrentUrl();
+    // assertThat(actual, containsString("brand"));
 
 
     public void multipleBrands(String... value) {
-        List<WebElement> Brandslist = driver.findElements(By.cssSelector(".DesignerFilterGroup43__list a "));
-        //List<WebElement>Brandslist = driver.findElements(By.xpath("//div[@class='DesignerFilterGroup43__list']//a//span[@class='Filter43__filterLineLabel']"));
+        driver.findElement(By.cssSelector("label[for='Brand-open']")).click();
+        By locator = By.xpath("//div[@class='DesignerFilterGroup43__list']//a");
+        List<WebElement> dropList = driver.findElements(By.cssSelector(".DesignerFilterGroup43__list a "));
+        if (!value[0].equalsIgnoreCase("ALL")) {
+            try {
+                for (int i = 0; i < dropList.size(); i++) {
+                    WebDriverWait waits = new WebDriverWait(driver, 20);
+                    String text = dropList.get(i).getText();
+                    System.out.println(text);
 
-        for (int i = 0; i < Brandslist.size(); i++) {
-            try{
-            String text = Brandslist.get(i).getText();
-            System.out.println(text);
-
-            for (int j = 0; j < value.length; j++) {
-                if (text.equals(value[j])) {
-                    Brandslist.get(i).click();
-                    driver.navigate().refresh();
-                    break;
-
-                    //driver.navigate().refresh();
+                    for (int j = 0; j < value.length; j++) {
+                        waits.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+                        if (text.equals(value[j])) {
+                            dropList.get(i).click();
+                            break;
+                        }
+                    }
                 }
-            }} catch (Exception e) {
+            } catch (Exception e) {
+
+            }}
+
+         else{
+                try {
+                    for (int full = 0; full < dropList.size(); full++) {
+                        dropList.get(full).click();
+                    }
+                } catch (Exception e) {
 
                 }
-        }
-    }
+            }
 
-    }
-
+        }}
 
 
 
+//List<WebElement>Brandslist = driver.findElements(By.xpath("//div[@class='DesignerFilterGroup43__list']//a//span[@class='Filter43__filterLineLabel']"));
 
 
-
-      //Thread.sleep(3000);
+        //Thread.sleep(3000);
     /*Alert alert= driver.switchTo().alert();
     // alert.dismiss();
       driver.findElement(By.cssSelector("a.deliver-component-CloseButton.deliver-component-CloseButton--transparent")).click();
@@ -223,10 +246,10 @@ public class checkLocators {
      action.moveToElement(moveToAccessories).build().perform();
      driver.findElement(By.linkText("All Accessories")).click();
       List<WebElement> randomAccessories =driver.findElements(By.cssSelector(".ProductListingPage43__layoutGrid a"));*/
-     // Random rand = new Random();
-    // int products= rand.nextInt(randomAccessories.size());
-     // WebElement randomProducts = randomAccessories.get(products);
-      //randomProducts.click();
+        // Random rand = new Random();
+        // int products= rand.nextInt(randomAccessories.size());
+        // WebElement randomProducts = randomAccessories.get(products);
+        //randomProducts.click();
       /*driver.findElement(By.cssSelector("button.Button10.Button10--primary.AsyncButton10.CTAButtons77__addToBag.primaryButton ")).click();
       driver.findElement(By.cssSelector("a[title='Shopping bag']")).click();
       driver.findElement(By.cssSelector(".primary-button-medium-wide.proceed-to-purchase.position-top")).click();
@@ -250,12 +273,12 @@ public class checkLocators {
       driver.findElement(By.cssSelector("button.Button10.Button10--primary.AsyncButton10.CTAButtons77__addToBag.primaryButton ")).click();*/
 
 
-   //action.moveToElement(search).build().perform();
-   //search.click();
+        //action.moveToElement(search).build().perform();
+        //search.click();
 
-   //driver.findElement(By.xpath("//div[@class='sf-search__popup sf-search__popup--open']//input[@type='text']")).click();
-   // driver.findElement(By.cssSelector(".sf-search__popup.sf-search__popup--open form)).sendKeys("bags");
-    //driver.findElement(By.cssSelector(".sf-nav.sf-hover div form input.sf-search__icon.sf-search__icon--nav")).click();
+        //driver.findElement(By.xpath("//div[@class='sf-search__popup sf-search__popup--open']//input[@type='text']")).click();
+        // driver.findElement(By.cssSelector(".sf-search__popup.sf-search__popup--open form)).sendKeys("bags");
+        //driver.findElement(By.cssSelector(".sf-nav.sf-hover div form input.sf-search__icon.sf-search__icon--nav")).click();
 
 
 
@@ -286,10 +309,6 @@ public class checkLocators {
          // connection.disconnect();
       }
  */
-
-
-
-
 
 
 

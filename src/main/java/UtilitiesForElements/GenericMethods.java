@@ -21,7 +21,7 @@ public static void actionsToMoveElement(WebDriver driver, WebElement element){
     action.moveToElement(element).build().perform();
 }
 
-public void actionsToClickElement(WebDriver driver, WebElement element){
+public static void actionsToClickElement(WebDriver driver, WebElement element){
     Actions actions = new Actions(driver);
     actions.click(element);
 }
