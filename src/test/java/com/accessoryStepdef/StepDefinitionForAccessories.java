@@ -4,6 +4,7 @@ import Pageelements.*;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.java.gl.E;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -36,6 +37,29 @@ public class StepDefinitionForAccessories  {
         String Actual = productDescriptionPage.getCurrentURL();
         assertThat(Actual,is(endsWith("-allaccessories"))); }
 
+    @Given("^User On Home Page$")
+    public void user_On_Home_Page() throws Throwable {
+
+    }
+
+
+
+    @When("^User search for product$")
+    public void user_search_for_product() throws Throwable {
+        homePage.searchWithKeywords("bags");
+
+    }
+
+    @Then("^User should be able to see relevant products$")
+    public void user_should_be_able_to_see_relevant_products() throws Throwable {
+        String actual =homePage.getCurrentURL();
+        String Exp = homePage.headerTitle().toLowerCase();
+        System.out.println(Exp);
+        assertThat(actual,containsString(Exp));
+
+    }
+
+
 
 
     @When("^User Selects The Product$")
@@ -47,9 +71,10 @@ public class StepDefinitionForAccessories  {
     public void user_Should_be_able_to_add_the_selected_product_to_Basket() throws Throwable {
         String actual = productDescriptionPage.getProductTitle();
         System.out.println(actual);
+        Thread.sleep(3000);
         productDescriptionPage.addProductToBag();
         String Expected= shoppingBagPage.productTitle();
-        assertEquals(actual,Expected); }
+        assertEquals(actual,equals(Expected)); }
 
 
 
@@ -130,7 +155,7 @@ public class StepDefinitionForAccessories  {
     String actual = accessoryPage.getCurrentURL();
     String TypesOFCategoryProducts = accessoryPage.HeaderOfTheCategory().toLowerCase();
     assertThat(actual,is(endsWith(TypesOFCategoryProducts)));
-
+   // assertThat(actual,containsString(TypesOFCategoryProducts));
     }
 
 

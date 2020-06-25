@@ -6,7 +6,7 @@
         "before": [
           {
             "result": {
-              "duration": 3216828413,
+              "duration": 3272906131,
               "status": "passed"
             },
             "match": {
@@ -14,14 +14,14 @@
             }
           }
         ],
-        "line": 76,
+        "line": 77,
         "name": "To check the Functionality of DesignerSearchField",
         "description": "",
         "id": "accessories;to-check-the-functionality-of-designersearchfield;;2",
         "after": [
           {
             "result": {
-              "duration": 128456566,
+              "duration": 129183233,
               "status": "passed"
             },
             "match": {
@@ -34,10 +34,10 @@
         "steps": [
           {
             "result": {
-              "duration": 4859796248,
+              "duration": 3981601294,
               "status": "passed"
             },
-            "line": 70,
+            "line": 71,
             "name": "User On Accessories Page",
             "match": {
               "location": "StepDefinitionForAccessories.user_On_Accessories_Page()"
@@ -46,10 +46,10 @@
           },
           {
             "result": {
-              "duration": 4500941643,
+              "duration": 3378959261,
               "status": "passed"
             },
-            "line": 71,
+            "line": 72,
             "name": "User Search for Brands using SearchBar \"Alexander McQUEEN\"",
             "match": {
               "arguments": [
@@ -67,10 +67,10 @@
           },
           {
             "result": {
-              "duration": 602283225,
+              "duration": 478810057,
               "status": "passed"
             },
-            "line": 72,
+            "line": 73,
             "name": "User should be able to search the brands in Search-field",
             "match": {
               "location": "StepDefinitionForAccessories.user_should_be_able_to_search_the_brands_in_Search_field()"
@@ -80,7 +80,7 @@
         ],
         "tags": [
           {
-            "line": 68,
+            "line": 69,
             "name": "@DesignerSearch"
           }
         ]
@@ -89,7 +89,7 @@
         "before": [
           {
             "result": {
-              "duration": 2476965260,
+              "duration": 2098898540,
               "status": "passed"
             },
             "match": {
@@ -97,14 +97,14 @@
             }
           }
         ],
-        "line": 77,
+        "line": 78,
         "name": "To check the Functionality of DesignerSearchField",
         "description": "",
         "id": "accessories;to-check-the-functionality-of-designersearchfield;;3",
         "after": [
           {
             "result": {
-              "duration": 100417722,
+              "duration": 126908040,
               "status": "passed"
             },
             "match": {
@@ -117,10 +117,10 @@
         "steps": [
           {
             "result": {
-              "duration": 1147333962,
+              "duration": 2270099988,
               "status": "passed"
             },
-            "line": 70,
+            "line": 71,
             "name": "User On Accessories Page",
             "match": {
               "location": "StepDefinitionForAccessories.user_On_Accessories_Page()"
@@ -129,10 +129,10 @@
           },
           {
             "result": {
-              "duration": 2804848619,
+              "duration": 3369705591,
               "status": "passed"
             },
-            "line": 71,
+            "line": 72,
             "name": "User Search for Brands using SearchBar \"Gucci\"",
             "match": {
               "arguments": [
@@ -150,10 +150,10 @@
           },
           {
             "result": {
-              "duration": 222379689,
+              "duration": 454884407,
               "status": "passed"
             },
-            "line": 72,
+            "line": 73,
             "name": "User should be able to search the brands in Search-field",
             "match": {
               "location": "StepDefinitionForAccessories.user_should_be_able_to_search_the_brands_in_Search_field()"
@@ -163,7 +163,7 @@
         ],
         "tags": [
           {
-            "line": 68,
+            "line": 69,
             "name": "@DesignerSearch"
           }
         ]
@@ -172,7 +172,7 @@
         "before": [
           {
             "result": {
-              "duration": 2316561034,
+              "duration": 2422553268,
               "status": "passed"
             },
             "match": {
@@ -180,14 +180,14 @@
             }
           }
         ],
-        "line": 78,
+        "line": 79,
         "name": "To check the Functionality of DesignerSearchField",
         "description": "",
         "id": "accessories;to-check-the-functionality-of-designersearchfield;;4",
         "after": [
           {
             "result": {
-              "duration": 107598605,
+              "duration": 119608580,
               "status": "passed"
             },
             "match": {
@@ -200,10 +200,10 @@
         "steps": [
           {
             "result": {
-              "duration": 2078025967,
+              "duration": 1649897602,
               "status": "passed"
             },
-            "line": 70,
+            "line": 71,
             "name": "User On Accessories Page",
             "match": {
               "location": "StepDefinitionForAccessories.user_On_Accessories_Page()"
@@ -212,10 +212,10 @@
           },
           {
             "result": {
-              "duration": 2125155343,
+              "duration": 4008132251,
               "status": "passed"
             },
-            "line": 71,
+            "line": 72,
             "name": "User Search for Brands using SearchBar \"xxxxxxx\"",
             "match": {
               "arguments": [
@@ -233,10 +233,10 @@
           },
           {
             "result": {
-              "duration": 421480556,
+              "duration": 452283124,
               "status": "passed"
             },
-            "line": 72,
+            "line": 73,
             "name": "User should be able to search the brands in Search-field",
             "match": {
               "location": "StepDefinitionForAccessories.user_should_be_able_to_search_the_brands_in_Search_field()"
@@ -246,7 +246,7 @@
         ],
         "tags": [
           {
-            "line": 68,
+            "line": 69,
             "name": "@DesignerSearch"
           }
         ]

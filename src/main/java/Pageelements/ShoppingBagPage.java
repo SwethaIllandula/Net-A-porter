@@ -12,6 +12,8 @@ public class ShoppingBagPage extends DriverManager {
 
 
     @FindBy(css = ".primary-button-medium-wide.proceed-to-purchase.position-top")
+    // (css="[aria-label='Add to Bag']")
+    // (css = ".primary-button-medium-wide.proceed-to-purchase.position-top")
     private WebElement proceedToPurchase;
 
 

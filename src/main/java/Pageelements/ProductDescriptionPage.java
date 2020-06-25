@@ -2,6 +2,7 @@ package Pageelements;
 
 import UtilitiesForElements.GenericMethods;
 import junit.framework.TestCase;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,7 +26,8 @@ public class ProductDescriptionPage extends DriverManager{
       @FindBy(css=".CombinedSelect11__customizedSelect ul li")
       private List<WebElement> randomSize;
 
-      @FindBy(css = "button[class$='addToBag primaryButton']")
+      @FindBy(css = " button.CTAButtons79__addToBag.primaryButton")
+      // (css = "button[class$='addToBag primaryButton']")
      // css = "button.Button10.Button10--primary.AsyncButton10.CTAButtons77__addToBag.primaryButton ")
       private WebElement addToBag;
 
@@ -59,7 +61,7 @@ public class ProductDescriptionPage extends DriverManager{
       @FindBy(className = "Header5__headingsContainer")
       private WebElement titleOfThePage;
 
-      @FindBy(className = "ProductInformation77__designer")
+      @FindBy(css = ".ProductInformation79__designer")
       private WebElement productTitle;
 
     @FindBy(css = "a[title='Shopping bag']")
@@ -95,7 +97,7 @@ int products=  GenericMethods.randomNumberHelper(productsAvailable);
 
 
 
-    public void selectRandomProduct(){
+    public void selectRandomProduct() throws InterruptedException {
     int Products =GenericMethods.randomNumberHelper(listAccessories.size());
     if(Products==0){
     TestCase.fail("No Products Available");}
@@ -103,14 +105,17 @@ int products=  GenericMethods.randomNumberHelper(productsAvailable);
     chooserandomProduct.click();
     GenericMethods.refreshPage(driver);
 
+
+
 }
 
     public String pageTitle(){
     return titleOfThePage.getText();
 }
 
-public void addProductToBag() throws InterruptedException {
-GenericMethods.refreshPage(driver);
+    public void addProductToBag() throws InterruptedException {
+   // GenericMethods.refreshPage(driver);
+    //Thread.sleep(3000);
     addToBag.click();
     checkShoppingBag.click();
     if(checkShoppingBag.equals("out of stock")){

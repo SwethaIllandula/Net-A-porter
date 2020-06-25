@@ -68,7 +68,11 @@ public static String getTitle(WebDriver driver){
 }
 
 
+public static void waits(WebDriver driver,int time,By locator){
+    WebDriverWait wait = new WebDriverWait(driver,20);
+    wait.until(ExpectedConditions.elementToBeSelected(locator));
 
+}
 
 
 }

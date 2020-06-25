@@ -18,6 +18,7 @@
 
   @Regression
   Scenario: Add To Basket
+  Given User On HomePage
   When User Selects The Product
   Then User Should be able to add the selected product to Basket
 

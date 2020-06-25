@@ -44,6 +44,9 @@ public class HomePage extends DriverManager {
     @FindBy(css = ".sf-nav__featured-designers ul li")
     private List<WebElement> featuredDesigners;
 
+    @FindBy(css = ".Header5__title")
+    private WebElement headertext;
+
 
    public HomePage(){
    }
@@ -64,7 +67,9 @@ public class HomePage extends DriverManager {
   public void enterSearchItem(String products){
         searchBox.sendKeys(products);}
 
-
+  public String headerTitle(){
+       return headertext.getText();
+  }
 
 
    public void  moveToHairAccessories(){
