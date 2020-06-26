@@ -74,7 +74,7 @@ public class StepDefinitionForAccessories  {
         Thread.sleep(3000);
         productDescriptionPage.addProductToBag();
         String Expected= shoppingBagPage.productTitle();
-        assertEquals(actual,equals(Expected)); }
+        assertEquals(actual,Expected); }
 
 
 

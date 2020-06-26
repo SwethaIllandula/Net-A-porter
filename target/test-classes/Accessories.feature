@@ -1,6 +1,6 @@
   Feature: Accessories
 
-
+  @AllAccessories
   Scenario: To check Functionality of Hair Accessories
   Given User On HomePage
   When User move-Over Accessories Department And selects All- Accessories

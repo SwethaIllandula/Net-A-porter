@@ -116,6 +116,7 @@ int products=  GenericMethods.randomNumberHelper(productsAvailable);
     public void addProductToBag() throws InterruptedException {
    // GenericMethods.refreshPage(driver);
     //Thread.sleep(3000);
+    GenericMethods.explicitWait(driver,20,addToBag);
     addToBag.click();
     checkShoppingBag.click();
     if(checkShoppingBag.equals("out of stock")){
